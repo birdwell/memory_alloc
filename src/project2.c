@@ -3,21 +3,13 @@
 #include <stdlib.h>
 #include <math.h>
 #include <stdbool.h>
-#include "./headers/firstfit.h"
-#include "./headers/bestfit.h"
-#include "./headers/nextfit.h"
+#include "./memory_algos/headers/firstfit.h"
+#include "./memory_algos/headers/bestfit.h"
+#include "./memory_algos/headers/nextfit.h"
 
 #define MAX_BUFFER 1024
 #define MAX_ARGS 64
 #define SEPARATORS " \n"
-
-struct Process
-{
-  char id[10];
-  int size;
-  int start;
-  int end;
-} Process;
 
 void listAvailable(char **memory, int length)
 {
@@ -124,7 +116,7 @@ void find(char **memory, int length, char *process_id) {
 void printMem(char **memory, int length) {
   for (size_t i = 0; i < length; i++)
   {
-    printf("mem[%zu] = %s \n", i, memory[i]);
+    // printf("mem[%zu] = %s \n", i, memory[i]);
   }
 }
 
@@ -201,7 +193,6 @@ int main(int argc, char *argv[])
           else if (!strcmp("ASSIGNED", args[1]))
           {
             listAllocated(memory, MEMORY);
-            // printMem(memory, MEMORY);
           }
         } else if (!strcmp("REQUEST", args[0])) {
           if(!strcmp("FIRSTFIT", TYPE)) {
@@ -210,11 +201,9 @@ int main(int argc, char *argv[])
             bf_allocate(memory, MEMORY, args[1], atoi(args[2]));
           } else if (!strcmp("NEXTFIT", TYPE)) {
             next_index = nf_allocate(memory, MEMORY, args[1], atoi(args[2]), next_index);
-            printMem(memory, MEMORY);
           }
         } else if (!strcmp("RELEASE", args[0])) {
           release(memory, MEMORY, args[1]);
-          printMem(memory, MEMORY);
         } else if (!strcmp("FIND", args[0])) {
           find(memory, MEMORY, args[1]);
         }
