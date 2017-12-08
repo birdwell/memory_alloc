@@ -21,22 +21,20 @@ void listAvailable(char **memory, int length)
   bool start_of_search = true;
 
   for (int i = 0; i < length; ++i) {
-    if (!strcmp("", memory[i]))
-    {
-      if (!found)
-      {
+    if (!strcmp("", memory[i])) {
+      if (!found) {
         found = true;
         start = i;
         start_of_search = false;
         printed = false;
       }
+
       size++;
       strcpy(last, memory[i]);
-    }
-    else if (strcmp("", memory[i]) && !strcmp("", last) && !start_of_search)
-    {
+    } else if (strcmp("", memory[i]) && !strcmp("", last) && !start_of_search) {
       printf("(%i,%i) \n", size, start);
       strcpy(last, memory[i]);
+      
       found = false;
       size = 0;
       printed = true;
@@ -58,8 +56,9 @@ void listAllocated(char **memory, int length)
   int size = 0;
   bool started = false;
   bool empty = true;
-  for (size_t i = 0; i < length; i++)
-  {
+
+  for (size_t i = 0; i < length; i++) {
+    // Check if it's non-empty
     if(strcmp(memory[i], "")) {
       if(strcmp(memory[i], last)) {
         if (started) {
@@ -97,9 +96,8 @@ void find(char **memory, int length, char *process_id) {
   int size = 0;
   bool found = false;
 
-  for (int i = 0; i < length; i++)
-  {
-    if(!strcmp(memory[i], process_id)) {
+  for (int i = 0; i < length; i++) {
+    if (!strcmp(memory[i], process_id)) {
       if (!found) {
         start = i;
         found = true;
@@ -107,6 +105,7 @@ void find(char **memory, int length, char *process_id) {
       size++;
     }
   }
+
   if(found) {
     printf("(%s, %i, %i) \n", process_id, size, start);
   } else {
@@ -114,9 +113,12 @@ void find(char **memory, int length, char *process_id) {
   }
 }
 
+/*
+* Params: memory allocation array, size of memory
+* Purpose: Print out array'c contents
+*/
 void printMem(char **memory, int length) {
-  for (size_t i = 0; i < length; i++)
-  {
+  for (size_t i = 0; i < length; i++) {
     printf("mem[%zu] = %s \n", i, memory[i]);
   }
 }
@@ -125,9 +127,8 @@ void release(char **memory, int length, char *process_id) {
   int reclaimed_memory = 0;
   int start = 0;
   bool found = false;
-  for (int i = 0; i < length; i++)
-  {
-    if(!strcmp(memory[i], process_id)) {
+  for (int i = 0; i < length; i++) {
+    if (!strcmp(memory[i], process_id)) {
       if (!found) {
         found = true;
         start = i;
@@ -150,6 +151,7 @@ int main(int argc, char *argv[])
   int MEMORY;
   int next_index = 0;
   bool allocation = false;
+
   char filename[100];
   char linebuffer[MAX_BUFFER];
   FILE *fp;
@@ -161,8 +163,8 @@ int main(int argc, char *argv[])
   MEMORY = atoi(argv[2]);
   strcpy(filename, argv[3]);
 
+  // Setup Memory Allocation Array
   char **memory;
-
   memory = malloc(MEMORY * sizeof(char *));
   for (int i = 0; i < MEMORY; i++)
     memory[i] = malloc((16) * sizeof(char));
@@ -182,9 +184,10 @@ int main(int argc, char *argv[])
       *arg++ = strtok(linebuffer, SEPARATORS);
       while ((*arg++ = strtok(NULL, SEPARATORS)));
 
+      // Command Guard - Skip Comments
       if (strcmp("#", args[0]))
       {
-
+        // --- List Commands ---
         if (!strcmp("LIST", args[0]))
         {
           if (!strcmp("AVAILABLE", args[1]))
@@ -196,6 +199,8 @@ int main(int argc, char *argv[])
             listAllocated(memory, MEMORY);
           }
         } else if (!strcmp("REQUEST", args[0])) {
+          // --- Request Commands ---
+          // Each algorithm has it's own request function
           if(!strcmp("FIRSTFIT", TYPE)) {
             ff_allocate(memory, MEMORY, args[1], atoi(args[2]));
           } else if (!strcmp("BESTFIT", TYPE)) {
@@ -204,8 +209,10 @@ int main(int argc, char *argv[])
             next_index = nf_allocate(memory, MEMORY, args[1], atoi(args[2]), next_index);
           }
         } else if (!strcmp("RELEASE", args[0])) {
+          // --- Release Command ---
           release(memory, MEMORY, args[1]);
         } else if (!strcmp("FIND", args[0])) {
+          // --- Find Command ---
           find(memory, MEMORY, args[1]);
         }
       }
