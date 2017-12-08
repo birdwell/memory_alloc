@@ -34,7 +34,7 @@ void listAvailable(char **memory, int length)
     }
     else if (strcmp("", memory[i]) && !strcmp("", last) && !start_of_search)
     {
-      printf("i: %i, (%i,%i) \n", i, size, start);
+      printf("(%i,%i) \n", size, start);
       strcpy(last, memory[i]);
       found = false;
       size = 0;
