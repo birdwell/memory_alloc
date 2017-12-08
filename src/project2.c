@@ -28,6 +28,7 @@ void listAvailable(char **memory, int length)
         found = true;
         start = i;
         start_of_search = false;
+        printed = false;
       }
       size++;
       strcpy(last, memory[i]);
@@ -87,7 +88,7 @@ void listAllocated(char **memory, int length)
   }
 
   if (empty) {
-    printf("NONE");
+    printf("NONE \n");
   }
 }
 
@@ -109,14 +110,14 @@ void find(char **memory, int length, char *process_id) {
   if(found) {
     printf("(%s, %i, %i) \n", process_id, size, start);
   } else {
-    printf("NOT FOUND");
+    printf("NOT FOUND \n");
   }
 }
 
 void printMem(char **memory, int length) {
   for (size_t i = 0; i < length; i++)
   {
-    // printf("mem[%zu] = %s \n", i, memory[i]);
+    printf("mem[%zu] = %s \n", i, memory[i]);
   }
 }
 
@@ -211,5 +212,6 @@ int main(int argc, char *argv[])
     }
   }
 
+  free(memory);
   return 0;
 }

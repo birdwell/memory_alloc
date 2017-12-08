@@ -1,0 +1,63 @@
+\hypertarget{buddysystem_8c}{}\section{/\+Volumes/\+Other/\+Documents/\+OU C\+S/\+Fall 2017/\+CS 3113 -\/ Intro to Operating Systems/\+Projects/\+Project 2/src/buddysystem.c File Reference}
+\label{buddysystem_8c}\index{/\+Volumes/\+Other/\+Documents/\+O\+U C\+S/\+Fall 2017/\+C\+S 3113 -\/ Intro to Operating Systems/\+Projects/\+Project 2/src/buddysystem.\+c@{/\+Volumes/\+Other/\+Documents/\+O\+U C\+S/\+Fall 2017/\+C\+S 3113 -\/ Intro to Operating Systems/\+Projects/\+Project 2/src/buddysystem.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structbuddy}{buddy}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{structbuddy}{buddy} \hyperlink{buddysystem_8c_a7c9f2769c8c038d5e69b38b7610c1d3c}{buddy\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{buddysystem_8c_aa1f6fac3d12eb99171397cc556c24704}{add\+\_\+buddy} (\hyperlink{buddysystem_8c_a7c9f2769c8c038d5e69b38b7610c1d3c}{buddy\+\_\+t} $\ast$tree, int size, int size\+\_\+of\+\_\+layer, char $\ast$process\+\_\+id)
+\item 
+int \hyperlink{buddysystem_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\item 
+\hyperlink{buddysystem_8c_a7c9f2769c8c038d5e69b38b7610c1d3c}{buddy\+\_\+t} $\ast$ \hyperlink{buddysystem_8c_adba2dba05d77912b7bf174ccbac016f0}{new\+\_\+buddy} (int memory\+\_\+space)
+\item 
+void \hyperlink{buddysystem_8c_a16369fe8f098b7e9bffd6d144d3d59ca}{print\+Buddy} (\hyperlink{buddysystem_8c_a7c9f2769c8c038d5e69b38b7610c1d3c}{buddy\+\_\+t} $\ast$root)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{buddysystem_8c_a7c9f2769c8c038d5e69b38b7610c1d3c}\label{buddysystem_8c_a7c9f2769c8c038d5e69b38b7610c1d3c}} 
+\index{buddysystem.\+c@{buddysystem.\+c}!buddy\+\_\+t@{buddy\+\_\+t}}
+\index{buddy\+\_\+t@{buddy\+\_\+t}!buddysystem.\+c@{buddysystem.\+c}}
+\subsubsection{\texorpdfstring{buddy\+\_\+t}{buddy\_t}}
+{\footnotesize\ttfamily typedef struct \hyperlink{structbuddy}{buddy}  \hyperlink{buddysystem_8c_a7c9f2769c8c038d5e69b38b7610c1d3c}{buddy\+\_\+t}}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{buddysystem_8c_aa1f6fac3d12eb99171397cc556c24704}\label{buddysystem_8c_aa1f6fac3d12eb99171397cc556c24704}} 
+\index{buddysystem.\+c@{buddysystem.\+c}!add\+\_\+buddy@{add\+\_\+buddy}}
+\index{add\+\_\+buddy@{add\+\_\+buddy}!buddysystem.\+c@{buddysystem.\+c}}
+\subsubsection{\texorpdfstring{add\+\_\+buddy()}{add\_buddy()}}
+{\footnotesize\ttfamily void add\+\_\+buddy (\begin{DoxyParamCaption}\item[{\hyperlink{buddysystem_8c_a7c9f2769c8c038d5e69b38b7610c1d3c}{buddy\+\_\+t} $\ast$}]{tree,  }\item[{int}]{size,  }\item[{int}]{size\+\_\+of\+\_\+layer,  }\item[{char $\ast$}]{process\+\_\+id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{buddysystem_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{buddysystem_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{buddysystem.\+c@{buddysystem.\+c}!main@{main}}
+\index{main@{main}!buddysystem.\+c@{buddysystem.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{buddysystem_8c_adba2dba05d77912b7bf174ccbac016f0}\label{buddysystem_8c_adba2dba05d77912b7bf174ccbac016f0}} 
+\index{buddysystem.\+c@{buddysystem.\+c}!new\+\_\+buddy@{new\+\_\+buddy}}
+\index{new\+\_\+buddy@{new\+\_\+buddy}!buddysystem.\+c@{buddysystem.\+c}}
+\subsubsection{\texorpdfstring{new\+\_\+buddy()}{new\_buddy()}}
+{\footnotesize\ttfamily \hyperlink{buddysystem_8c_a7c9f2769c8c038d5e69b38b7610c1d3c}{buddy\+\_\+t}$\ast$ new\+\_\+buddy (\begin{DoxyParamCaption}\item[{int}]{memory\+\_\+space }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{buddysystem_8c_a16369fe8f098b7e9bffd6d144d3d59ca}\label{buddysystem_8c_a16369fe8f098b7e9bffd6d144d3d59ca}} 
+\index{buddysystem.\+c@{buddysystem.\+c}!print\+Buddy@{print\+Buddy}}
+\index{print\+Buddy@{print\+Buddy}!buddysystem.\+c@{buddysystem.\+c}}
+\subsubsection{\texorpdfstring{print\+Buddy()}{printBuddy()}}
+{\footnotesize\ttfamily void print\+Buddy (\begin{DoxyParamCaption}\item[{\hyperlink{buddysystem_8c_a7c9f2769c8c038d5e69b38b7610c1d3c}{buddy\+\_\+t} $\ast$}]{root }\end{DoxyParamCaption})}
+

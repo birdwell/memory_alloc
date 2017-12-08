@@ -1,0 +1,94 @@
+\hypertarget{project2_8c}{}\section{/\+Volumes/\+Other/\+Documents/\+OU C\+S/\+Fall 2017/\+CS 3113 -\/ Intro to Operating Systems/\+Projects/\+Project 2/src/project2.c File Reference}
+\label{project2_8c}\index{/\+Volumes/\+Other/\+Documents/\+O\+U C\+S/\+Fall 2017/\+C\+S 3113 -\/ Intro to Operating Systems/\+Projects/\+Project 2/src/project2.\+c@{/\+Volumes/\+Other/\+Documents/\+O\+U C\+S/\+Fall 2017/\+C\+S 3113 -\/ Intro to Operating Systems/\+Projects/\+Project 2/src/project2.\+c}}
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}./memory\+\_\+algos/headers/firstfit.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}./memory\+\_\+algos/headers/bestfit.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}./memory\+\_\+algos/headers/nextfit.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{project2_8c_a1d5dab30b404fab91608086105afc78c}{M\+A\+X\+\_\+\+B\+U\+F\+F\+ER}~1024
+\item 
+\#define \hyperlink{project2_8c_a29b7451465deac204c5f7cb1f9c6e1fc}{M\+A\+X\+\_\+\+A\+R\+GS}~64
+\item 
+\#define \hyperlink{project2_8c_a557b042aa353cdf74324fa04c52888b1}{S\+E\+P\+A\+R\+A\+T\+O\+RS}~\char`\"{} \textbackslash{}n\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{project2_8c_a50432e14829e8674c9888db9ee2618a9}{list\+Available} (char $\ast$$\ast$memory, int length)
+\item 
+void \hyperlink{project2_8c_adadfab0a726bb4b61c4c90794f96d309}{list\+Allocated} (char $\ast$$\ast$memory, int length)
+\item 
+void \hyperlink{project2_8c_adc7e34ec737e0b8bbacd913b1842445f}{find} (char $\ast$$\ast$memory, int length, char $\ast$process\+\_\+id)
+\item 
+void \hyperlink{project2_8c_ad9447d3cf9b4f4038016f84a962f5773}{print\+Mem} (char $\ast$$\ast$memory, int length)
+\item 
+void \hyperlink{project2_8c_a62d67bf5015c9bf1e2cd17102dde6bf9}{release} (char $\ast$$\ast$memory, int length, char $\ast$process\+\_\+id)
+\item 
+int \hyperlink{project2_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{project2_8c_a29b7451465deac204c5f7cb1f9c6e1fc}\label{project2_8c_a29b7451465deac204c5f7cb1f9c6e1fc}} 
+\index{project2.\+c@{project2.\+c}!M\+A\+X\+\_\+\+A\+R\+GS@{M\+A\+X\+\_\+\+A\+R\+GS}}
+\index{M\+A\+X\+\_\+\+A\+R\+GS@{M\+A\+X\+\_\+\+A\+R\+GS}!project2.\+c@{project2.\+c}}
+\subsubsection{\texorpdfstring{M\+A\+X\+\_\+\+A\+R\+GS}{MAX\_ARGS}}
+{\footnotesize\ttfamily \#define M\+A\+X\+\_\+\+A\+R\+GS~64}
+
+\mbox{\Hypertarget{project2_8c_a1d5dab30b404fab91608086105afc78c}\label{project2_8c_a1d5dab30b404fab91608086105afc78c}} 
+\index{project2.\+c@{project2.\+c}!M\+A\+X\+\_\+\+B\+U\+F\+F\+ER@{M\+A\+X\+\_\+\+B\+U\+F\+F\+ER}}
+\index{M\+A\+X\+\_\+\+B\+U\+F\+F\+ER@{M\+A\+X\+\_\+\+B\+U\+F\+F\+ER}!project2.\+c@{project2.\+c}}
+\subsubsection{\texorpdfstring{M\+A\+X\+\_\+\+B\+U\+F\+F\+ER}{MAX\_BUFFER}}
+{\footnotesize\ttfamily \#define M\+A\+X\+\_\+\+B\+U\+F\+F\+ER~1024}
+
+\mbox{\Hypertarget{project2_8c_a557b042aa353cdf74324fa04c52888b1}\label{project2_8c_a557b042aa353cdf74324fa04c52888b1}} 
+\index{project2.\+c@{project2.\+c}!S\+E\+P\+A\+R\+A\+T\+O\+RS@{S\+E\+P\+A\+R\+A\+T\+O\+RS}}
+\index{S\+E\+P\+A\+R\+A\+T\+O\+RS@{S\+E\+P\+A\+R\+A\+T\+O\+RS}!project2.\+c@{project2.\+c}}
+\subsubsection{\texorpdfstring{S\+E\+P\+A\+R\+A\+T\+O\+RS}{SEPARATORS}}
+{\footnotesize\ttfamily \#define S\+E\+P\+A\+R\+A\+T\+O\+RS~\char`\"{} \textbackslash{}n\char`\"{}}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{project2_8c_adc7e34ec737e0b8bbacd913b1842445f}\label{project2_8c_adc7e34ec737e0b8bbacd913b1842445f}} 
+\index{project2.\+c@{project2.\+c}!find@{find}}
+\index{find@{find}!project2.\+c@{project2.\+c}}
+\subsubsection{\texorpdfstring{find()}{find()}}
+{\footnotesize\ttfamily void find (\begin{DoxyParamCaption}\item[{char $\ast$$\ast$}]{memory,  }\item[{int}]{length,  }\item[{char $\ast$}]{process\+\_\+id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{project2_8c_adadfab0a726bb4b61c4c90794f96d309}\label{project2_8c_adadfab0a726bb4b61c4c90794f96d309}} 
+\index{project2.\+c@{project2.\+c}!list\+Allocated@{list\+Allocated}}
+\index{list\+Allocated@{list\+Allocated}!project2.\+c@{project2.\+c}}
+\subsubsection{\texorpdfstring{list\+Allocated()}{listAllocated()}}
+{\footnotesize\ttfamily void list\+Allocated (\begin{DoxyParamCaption}\item[{char $\ast$$\ast$}]{memory,  }\item[{int}]{length }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{project2_8c_a50432e14829e8674c9888db9ee2618a9}\label{project2_8c_a50432e14829e8674c9888db9ee2618a9}} 
+\index{project2.\+c@{project2.\+c}!list\+Available@{list\+Available}}
+\index{list\+Available@{list\+Available}!project2.\+c@{project2.\+c}}
+\subsubsection{\texorpdfstring{list\+Available()}{listAvailable()}}
+{\footnotesize\ttfamily void list\+Available (\begin{DoxyParamCaption}\item[{char $\ast$$\ast$}]{memory,  }\item[{int}]{length }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{project2_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{project2_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{project2.\+c@{project2.\+c}!main@{main}}
+\index{main@{main}!project2.\+c@{project2.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{project2_8c_ad9447d3cf9b4f4038016f84a962f5773}\label{project2_8c_ad9447d3cf9b4f4038016f84a962f5773}} 
+\index{project2.\+c@{project2.\+c}!print\+Mem@{print\+Mem}}
+\index{print\+Mem@{print\+Mem}!project2.\+c@{project2.\+c}}
+\subsubsection{\texorpdfstring{print\+Mem()}{printMem()}}
+{\footnotesize\ttfamily void print\+Mem (\begin{DoxyParamCaption}\item[{char $\ast$$\ast$}]{memory,  }\item[{int}]{length }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{project2_8c_a62d67bf5015c9bf1e2cd17102dde6bf9}\label{project2_8c_a62d67bf5015c9bf1e2cd17102dde6bf9}} 
+\index{project2.\+c@{project2.\+c}!release@{release}}
+\index{release@{release}!project2.\+c@{project2.\+c}}
+\subsubsection{\texorpdfstring{release()}{release()}}
+{\footnotesize\ttfamily void release (\begin{DoxyParamCaption}\item[{char $\ast$$\ast$}]{memory,  }\item[{int}]{length,  }\item[{char $\ast$}]{process\+\_\+id }\end{DoxyParamCaption})}
+
