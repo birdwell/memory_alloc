@@ -251,7 +251,7 @@ int main(int argc, char *argv[])
       }
     }
   }
-
+  // print_buddy(buddy_system);
   free(memory);
   return 0;
 }

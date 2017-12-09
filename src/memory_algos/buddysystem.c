@@ -43,7 +43,7 @@ void Pop()
   depth[di -= 4] = 0;
 }
 
-void Print(buddy_t *tree)
+void print_buddy(buddy_t *tree)
 {
   printf("(%d) - p(%s) %i \n", tree->size, tree->process_id, tree->memory_space);
 
@@ -51,12 +51,12 @@ void Print(buddy_t *tree)
   {
     printf("%s `--", depth);
     Push('|');
-    Print(tree->right);
+    print_buddy(tree->right);
     Pop();
 
     printf("%s `--", depth);
     Push(' ');
-    Print(tree->left);
+    print_buddy(tree->left);
     Pop();
   }
 }

@@ -25,5 +25,6 @@ void find_buddy(buddy_t *tree, char *process_id);
 void buddy_list_allocated(buddy_t *tree, int size);
 void buddy_list_free(buddy_t *tree, int start);
 bool find_free(buddy_t *tree, int start, bool isFull);
+void print_buddy(buddy_t *tree);
 
 #endif
