@@ -6,6 +6,7 @@
 #include "./memory_algos/headers/firstfit.h"
 #include "./memory_algos/headers/bestfit.h"
 #include "./memory_algos/headers/nextfit.h"
+#include "./memory_algos/headers/buddysystem.h"
 
 #define MAX_BUFFER 1024
 #define MAX_ARGS 64
@@ -183,6 +184,7 @@ int main(int argc, char *argv[])
       arg = args;
       *arg++ = strtok(linebuffer, SEPARATORS);
       while ((*arg++ = strtok(NULL, SEPARATORS)));
+
 
       // Command Guard - Skip Comments
       if (strcmp("#", args[0]))
