@@ -4,31 +4,11 @@
 #include <string.h>
 #include "./headers/buddysystem.h"
 
-/*
-* BUDDY SYSTEM SETUP
-*/
-
-static inline int
-is_pow_of_2(int x)
-{
-  return !(x & (x - 1));
-}
-
-static inline int
-next_pow_of_2(int x)
-{
-  if (is_pow_of_2(x))
-    return x;
-  x |= x >> 1;
-  x |= x >> 2;
-  x |= x >> 4;
-  x |= x >> 8;
-  x |= x >> 16;
-  return x + 1;
-}
-
 char depth[2056];
 int di;
+
+// Printing for testing purposes
+// http://www.randygaul.net/2015/06/15/printing-pretty-ascii-trees/
 
 void Push(char c) {
   depth[di++] = ' ';
@@ -61,7 +41,9 @@ void print_buddy(buddy_t *tree)
   }
 }
 
-// --- END OF SETUP ---
+// --- END OF Printing ---
+
+// My main testing function
 
 // int main()
 // {

@@ -33,6 +33,46 @@ This algorithm searches the whole memory allocation for the best possible spot. 
    of the current best. It can opt out if it finds a perfect match
 5) At the end, it allocates to the best possible fit.
 
+## Buddy
+
+Buddy uses 2^k slots. You start with an 2^n slot. Then you split until a small enough slot is found. You search for a whole if it exists after that. Upon removal of a node, you clean up and merge back the slots until you have a big slot left. 
+
+This is created with a buddy struct as nodes in a binary tree. 
+
+I used this to print out for testing purposes my binrary tree: http://www.randygaul.net/2015/06/15/printing-pretty-ascii-trees/
+This help me visualize what my tree should actually look like. 
+
+```
+typedef struct buddy
+{
+  int size;
+  int memory_space;
+  bool is_alloc;
+  char process_id[16];
+  int start;
+
+  struct buddy *left;
+  struct buddy *right;
+} buddy_t;
+```
+
+All of the functions are seperate for the buddy system. This was a seperate project in my mind. I finished the first three algos and then started fresh here. This took most of my time during the project. My buddy system isn't spotless. I deeply understand buddy system now. This stretched my limits in C programming. I used recursion and binrary trees. I wanted to actually attempt it. I took up the challenge. I wish I could continue to polish my algorithm. 
+
+### Allocaiton:
+I am able to search for a suitable hole for it. It creates empty nodes until a perfect hole is found. It then allocates it in the hole. 
+
+### Release:
+I searched the tree for the process tree. Once I find it, I empty out that node. I then have a clean tree function that recursively merges empty slots in the tree until it's clean. 
+
+For the other, commands I did a simple approach of iterating through the tree and printing the needed information of where they are allocated. 
+
+Here are some areas I want to continue to improve on. 
+
+BUDDY TODO: 
+  - releative locations for allocating, releasing
+  - edges cases on list avaliable
+  - edge edge cases with the binrary tree in usuage
+
 # Commands
 
 ## REQUEST 
