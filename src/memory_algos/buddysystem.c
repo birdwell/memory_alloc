@@ -63,35 +63,35 @@ void Print(buddy_t *tree)
 
 // --- END OF SETUP ---
 
-int main()
-{
-  int MEMORY_SIZE = 1024;
-  buddy_t *buddy_system = malloc(sizeof(buddy_t));
-  /* set sizeues explicitly, alternative would be calloc() */
-  // ROOT
-  buddy_system->size = 0;
-  buddy_system->memory_space = MEMORY_SIZE;
-  buddy_system->is_alloc = false;
-  strcpy(buddy_system->process_id, "root");
-  buddy_system->left = NULL;
-  buddy_system->right = NULL;
-  bool succesfull;
-  allocate_buddy(buddy_system, 200, buddy_system->memory_space, "A");
-  allocate_buddy(buddy_system, 128, buddy_system->memory_space, "B");
-  allocate_buddy(buddy_system, 120, buddy_system->memory_space, "C");
-  allocate_buddy(buddy_system, 400, buddy_system->memory_space, "D");
-  allocate_buddy(buddy_system, 100, buddy_system->memory_space, "E");
-  Print(buddy_system);
+// int main()
+// {
+//   int MEMORY_SIZE = 1024;
+//   buddy_t *buddy_system = malloc(sizeof(buddy_t));
+//   /* set sizeues explicitly, alternative would be calloc() */
+//   // ROOT
+//   buddy_system->size = 0;
+//   buddy_system->memory_space = MEMORY_SIZE;
+//   buddy_system->is_alloc = false;
+//   strcpy(buddy_system->process_id, "root");
+//   buddy_system->left = NULL;
+//   buddy_system->right = NULL;
+//   bool succesfull;
+//   allocate_buddy(buddy_system, 200, buddy_system->memory_space, "A");
+//   allocate_buddy(buddy_system, 128, buddy_system->memory_space, "B");
+//   allocate_buddy(buddy_system, 120, buddy_system->memory_space, "C");
+//   // allocate_buddy(buddy_system, 400, buddy_system->memory_space, "D");
+//   Print(buddy_system);
 
-  release_buddy(buddy_system, "B");
-  release_buddy(buddy_system, "C");
-  Print(buddy_system);
+//   // release_buddy(buddy_system, "B");
+//   // release_buddy(buddy_system, "C");
+//   // Print(buddy_system);
 
-  find_buddy(buddy_system, "A");
-  buddy_list_allocated(buddy_system);
-  printf("\n");
-  free(buddy_system);
-}
+//   find_buddy(buddy_system, "A");
+//   buddy_list_allocated(buddy_system, 0);
+//   buddy_list_free(buddy_system, 0);
+//   printf("\n");
+//   free(buddy_system);
+// }
 
 void allocate_buddy(buddy_t *tree, int size, int size_of_layer, char *process_id) {
   bool success;
@@ -198,16 +198,54 @@ bool search_tree(buddy_t *tree, char *process_id) {
   return found;
 } 
 
-void buddy_list_allocated(buddy_t *tree) {
+void buddy_list_allocated(buddy_t *tree, int start) {
   // (A, n, x)
+  // if (tree->left == NULL && tree->right == NULL && tree->is_alloc == false && !strcmp(tree->process_id, "root"))
+  // {
+  //   printf("NONE \n");
+  //   return;
+  // }
+
   if (tree == NULL)
     return;
   
-  buddy_list_allocated(tree->left);
+  buddy_list_allocated(tree->left, start);
   if (tree->is_alloc) {
-    printf("%s, %i, x \n", tree->process_id, tree->size);
+    printf("%s, %i, %i \n", tree->process_id, tree->size, start);
   }
-  buddy_list_allocated(tree->right);
+  if (tree->left != NULL) {
+    buddy_list_allocated(tree->right, tree->left->memory_space + start);
+  } else {
+    buddy_list_allocated(tree->right, start);
+  }
+}
+
+void buddy_list_free(buddy_t *tree, int start) {
+  bool isFull = true;
+  
+  isFull = find_free(tree, start, isFull);
+  if (isFull) {
+    printf("FULL \n");
+  }
+}
+
+bool find_free(buddy_t *tree, int start, bool isFull) {
+  // (n1, x1)
+  if (tree == NULL)
+    return isFull;
+  
+  find_free(tree->right, start, isFull);
+  if (!tree->is_alloc && strcmp(tree->process_id, "root")) {
+    printf("%i, %i \n", tree->memory_space, start);
+    isFull = false;
+  }
+  if (tree->left != NULL) {
+    find_free(tree->right, tree->left->memory_space + start, isFull);
+  } else {
+    find_free(tree->right, start, isFull);
+  }
+
+  return isFull;
 }
 
 void clean_tree(buddy_t *tree) {

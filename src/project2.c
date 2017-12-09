@@ -152,6 +152,7 @@ int main(int argc, char *argv[])
   int MEMORY;
   int next_index = 0;
   bool allocation = false;
+  buddy_t *buddy_system = malloc(sizeof(buddy_t));
 
   char filename[100];
   char linebuffer[MAX_BUFFER];
@@ -163,6 +164,18 @@ int main(int argc, char *argv[])
   strcpy(TYPE, argv[1]);
   MEMORY = atoi(argv[2]);
   strcpy(filename, argv[3]);
+
+
+  if (!strcmp(TYPE, "BUDDY")) {
+    /* set sizeues explicitly, alternative would be calloc() */
+    // ROOT
+    buddy_system->size = 0;
+    buddy_system->memory_space = MEMORY;
+    buddy_system->is_alloc = false;
+    strcpy(buddy_system->process_id, "root");
+    buddy_system->left = NULL;
+    buddy_system->right = NULL;
+  }
 
   // Setup Memory Allocation Array
   char **memory;
@@ -194,11 +207,19 @@ int main(int argc, char *argv[])
         {
           if (!strcmp("AVAILABLE", args[1]))
           {
-            listAvailable(memory, MEMORY);
+            if (!strcmp(TYPE, "BUDDY")) {
+              buddy_list_free(buddy_system, 0);
+            } else {
+              listAvailable(memory, MEMORY);
+            }
           }
           else if (!strcmp("ASSIGNED", args[1]))
           {
-            listAllocated(memory, MEMORY);
+            if (!strcmp(TYPE, "BUDDY")) {
+              buddy_list_allocated(buddy_system, 0);
+            } else {
+              listAllocated(memory, MEMORY);
+            }
           }
         } else if (!strcmp("REQUEST", args[0])) {
           // --- Request Commands ---
@@ -209,13 +230,23 @@ int main(int argc, char *argv[])
             bf_allocate(memory, MEMORY, args[1], atoi(args[2]));
           } else if (!strcmp("NEXTFIT", TYPE)) {
             next_index = nf_allocate(memory, MEMORY, args[1], atoi(args[2]), next_index);
+          } else if (!strcmp("BUDDY",TYPE)) {
+            allocate_buddy(buddy_system, atoi(args[2]), MEMORY, args[1]);
           }
         } else if (!strcmp("RELEASE", args[0])) {
           // --- Release Command ---
-          release(memory, MEMORY, args[1]);
+          if (!strcmp("BUDDY", TYPE)) {
+            release_buddy(buddy_system, args[1]);
+          } else {
+            release(memory, MEMORY, args[1]);
+          }
         } else if (!strcmp("FIND", args[0])) {
           // --- Find Command ---
-          find(memory, MEMORY, args[1]);
+          if (!strcmp("BUDDY", TYPE)) {
+            find_buddy(buddy_system, args[1]);
+          } else {
+            find(memory, MEMORY, args[1]);
+          }
         }
       }
     }
